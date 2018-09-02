@@ -11,38 +11,47 @@ def last(x):
 	x = bin(x)
 	return x[len(x)-1]
 
+def make_even(list):
+	i = len(list)
+	while i!=8:
+		list.append('0')
+		i = i+1
+	return list
+
 def main():
 	
 	#raw image by user
-	raw_image = cv.imread('../Res/input_image.png',1)
+	raw_image = cv.imread('../Res/input_image2.png',1)
 
 	#Getting image height and width
 	height,width = raw_image.shape[:2]
 
 	#User-message
-	user_message = "vasu tomar"
-	
+	user_message = "I may not be superstitious but i am a little-stitious"
 	#encoding the message to get bytes
 	covertmsg = user_message.encode()
+	end_marker = " ;;"
 
-	i=0
-	j=0
+	user_message = user_message + end_marker
+	i = 0
+	j = 0
+	k = 0
 
-	#Traversing through the byte array
-	for k in range(len(covertmsg)):
+	for byteMessage in covertmsg:
 		list = []
-		list = conv_to_bin(covertmsg[k])
+		list = conv_to_bin(byteMessage)
+		list = make_even(list)
+		
 		for z in list:
-			if z == 1:
-				if last(raw_image[i][j][2]) == 0:
-					raw_image[i][j][2] = raw_image[i][j][2] + 1
+			if z == '1':
+				if last(raw_image[i][j][k]) == '0':
+					raw_image[i][j][k] = raw_image[i][j][k] + 1
 			else:
-				if last(raw_image[i][j][2]) == 1:
-					raw_image[i][j][2] = raw_image[i][j][2] - 1
-			j = j+1
-			if j == width:
-				j = 0
-				i = i+1
+				if last(raw_image[i][j][k]) == '1':
+					raw_image[i][j][k] = raw_image[i][j][k] - 1
+
+			j = (j+1)%width
+			k = (k+1)%3
 
 	#saving the changed image
 	cv.imwrite('../Res/stegnographed_image.png',raw_image)
