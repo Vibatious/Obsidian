@@ -14,6 +14,7 @@ def img_to_bin(i):
 
 def main():
 	input_img = input("Enter the file name: ")
+	input_img  = "../original_image/" + input_img 
 	img = cv.imread(input_img)
 	user_msg = input("Enter cover message:- \t")
 	encode_msg = user_msg.encode()
@@ -41,6 +42,7 @@ def main():
 			k=k%3
 
 	out_img = input("Enter the output file name: ")
+	out_img = "../steg_image/" + out_img
 	cv.imwrite(out_img,img)
 if __name__ == '__main__':
 	main()
