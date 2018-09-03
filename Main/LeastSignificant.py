@@ -50,11 +50,13 @@ def main():
 				if last(raw_image[i][j][k]) == '1':
 					raw_image[i][j][k] = raw_image[i][j][k] - 1
 
+			if (j+1)%width == 0:
+				i = i+1
 			j = (j+1)%width
 			k = (k+1)%3
 
 	#saving the changed image
-	cv.imwrite('../Res/stegnographed_image.png',raw_image)
+	cv.imwrite('../Res/steganographed_image.png',raw_image)
 		
 if __name__ == '__main__':
 	main()
