@@ -21,7 +21,7 @@ def make_even(list):
 def main():
 	
 	#raw image by user
-	raw_image = cv.imread('../Res/input_image2.png',1)
+	raw_image = cv.imread('../Res/input_image.png',1)
 
 	#Getting image height and width
 	height,width = raw_image.shape[:2]
