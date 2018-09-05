@@ -14,7 +14,7 @@ def last(x):
 def make_even(list):
 	i = len(list)
 	while i!=8:
-		list.append('0')
+		list.insert(0,'0')
 		i = i+1
 	return list
 
@@ -27,20 +27,25 @@ def main():
 	height,width = raw_image.shape[:2]
 
 	#User-message
-	user_message = "I may not be superstitious but i am a little-stitious"
+	user_message = "vasu tomar is a nice person"
 	#encoding the message to get bytes
 	covertmsg = user_message.encode()
-	end_marker = " ;;"
 
-	user_message = user_message + end_marker
+	#user_message = user_message + end_marker
+	print("The message is = {}".format(user_message))
+	file_obj = open("lett","w")
+	file_obj.write(str(len(user_message)))
 	i = 0
 	j = 0
 	k = 0
 
 	for byteMessage in covertmsg:
+		#print(byteMessage)
 		list = []
 		list = conv_to_bin(byteMessage)
 		list = make_even(list)
+		#print(list,end=" ")
+		#print("")
 		
 		for z in list:
 			if z == '1':

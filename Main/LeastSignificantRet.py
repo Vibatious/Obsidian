@@ -99,8 +99,12 @@ def main():
 			k = (k+1)%3
 
 	i=0
-
-	while True:
+	file_obj = open("lett","r")
+	string = file_obj.readline()
+	ran = int(string)
+	mark = 0
+	#print(mark)
+	while mark!=ran:
 		if getnext(list,i) == ';':
 			if getnext(list,i+8) == ';':
 				return
@@ -108,8 +112,10 @@ def main():
 			message+=getnext(list,i)
 			i = i+8
 
+		mark = mark+1
 
-	print(message)
+
+	print("decoded message is = {}".format(message))
 
 if __name__ == '__main__':
 	main()
