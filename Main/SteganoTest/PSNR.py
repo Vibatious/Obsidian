@@ -13,8 +13,8 @@ def calculate(img):
 def main():
 	
 	#Loading images (orignal image and compressed image)
-	orignal_image = cv2.imread('../Res/input_image.png',1)
-	compressed_image = cv2.imread('../Res/steganographed_image.png',1)
+	orignal_image = cv2.imread('../../Res/input_image.png',1)
+	compressed_image = cv2.imread('../../Res/steganographed_image.png',1)
 
 	#Getting image height and width
 	height,width = orignal_image.shape[:2]
