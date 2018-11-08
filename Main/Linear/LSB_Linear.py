@@ -1,5 +1,7 @@
 import cv2 as cv
 
+main()
+
 def conv_to_bin(number):
 	"""Returns a list, binary equivalent of a number."""
 	bytes = bin(number)
@@ -29,6 +31,7 @@ def encode():
 
 	''' Reading the Imgae file and calculating height and width of the image'''
 	raw_image = cv.imread('../../Res/input_image.png',1)
+	#print(raw_image)
 	height,width = raw_image.shape[:2]
 
 	'''calls get_user_message function to take input of the user message and converts it to a byte array'''
@@ -41,6 +44,21 @@ def encode():
 	color=0
 	
 	iterations = 0
+
+	first_byte = (raw_image[0][0][0])
+	to_bin = conv_to_bin(first_byte)
+	#print(to_bin)
+	to_bin[len(to_bin)-2] = '0'
+	#print(to_bin)
+
+	first_byte = 0
+
+	for i in range(8):
+		if(to_bin[i]=='1'):
+			first_byte+=(pow(2,7-i))
+
+	#print(first_byte)
+	raw_image[0][0][0] = first_byte 
 
 	for byteMessage in covertmsg:
 		
@@ -68,6 +86,3 @@ def encode():
 
 def main():
 	encode()
-	
-if __name__ == '__main__':
-	main()

@@ -19,7 +19,7 @@ def last(x):
 
 def get_user_message():
 	"""Returns a string, the user input."""
-	file_obj = open("../../Res/user_input.txt","r")
+	file_obj = open("Res/user_input.txt","r")
 	user_message = file_obj.readline()
 	return user_message
 	
@@ -28,7 +28,8 @@ def encode():
 	"""Main Encoding Process."""
 
 	''' Reading the Imgae file and calculating height and width of the image'''
-	raw_image = cv.imread('../../Res/input_image.png',1)
+	raw_image = cv.imread('Res/input_image.png',1)
+	#print(raw_image)
 	height,width = raw_image.shape[:2]
 
 	'''calls get_user_message function to take input of the user message and converts it to a byte array'''
@@ -45,7 +46,7 @@ def encode():
 	first_byte = (raw_image[0][0][0])
 	to_bin = conv_to_bin(first_byte)
 	#print(to_bin)
-	to_bin[len(to_bin)-2] = '1'
+	to_bin[len(to_bin)-2] = '0'
 	#print(to_bin)
 
 	first_byte = 0
@@ -59,7 +60,7 @@ def encode():
 
 	for byteMessage in covertmsg:
 		
-		Binary_equival = conv_to_bin(byteMessage) 
+		Binary_equival = conv_to_bin(byteMessage)
 		
 		for number in Binary_equival:
 			if number == '1':
@@ -70,21 +71,16 @@ def encode():
 					raw_image[row][column][color] = raw_image[row][column][color] - 1
 
 			column = (column+1)%width
-			color = (color+1)%3
 
 			if column == 0:
 				row = row+1
 				if row == height:
 					row = 0
 					column = 0
-					iteration = iteration+1
-					color = iteration
+					color = color+1
 
 	'''Writing the steganographed image'''
-	cv.imwrite('../../Res/steganographed_image.png',raw_image)
+	cv.imwrite('Res/steganographed_image.png',raw_image)
 
 def main():
 	encode()
-	
-if __name__ == '__main__':
-	main()

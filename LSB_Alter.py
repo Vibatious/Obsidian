@@ -19,16 +19,16 @@ def last(x):
 
 def get_user_message():
 	"""Returns a string, the user input."""
-	file_obj = open("../../Res/user_input.txt","r")
+	file_obj = open("Res/user_input.txt","r")
 	user_message = file_obj.readline()
 	return user_message
 	
 
-def encode():
+def encode(): 
 	"""Main Encoding Process."""
 
 	''' Reading the Imgae file and calculating height and width of the image'''
-	raw_image = cv.imread('../../Res/input_image.png',1)
+	raw_image = cv.imread('Res/input_image.png',1)
 	height,width = raw_image.shape[:2]
 
 	'''calls get_user_message function to take input of the user message and converts it to a byte array'''
@@ -81,7 +81,7 @@ def encode():
 					color = iteration
 
 	'''Writing the steganographed image'''
-	cv.imwrite('../../Res/steganographed_image.png',raw_image)
+	cv.imwrite('Res/steganographed_image.png',raw_image)
 
 def main():
 	encode()
