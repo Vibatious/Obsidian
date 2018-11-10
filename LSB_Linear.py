@@ -84,3 +84,5 @@ def encode():
 
 def main():
 	encode()
+
+main()
