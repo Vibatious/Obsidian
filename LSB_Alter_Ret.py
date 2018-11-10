@@ -26,6 +26,7 @@ def getnext(list1,pos):
 			sum = sum+pow(2,k)
 		k = k-1
 
+	#print(chr(sum))
 	return chr(sum)
 
 def get_message_size():
@@ -62,12 +63,21 @@ def decode():
 			color = (color+1)%3
 	
 	message_size = get_message_size()
-
 	i=0
-	while message_size:
-		message+=getnext(last_bits,i)
+	while True:
+		nextChar = getnext(last_bits,i)
+		if(nextChar == '`'):
+			temp = getnext(last_bits,i)
+			i = i+8
+			temp2 = getnext(last_bits,i)
+			if(temp == '`'):
+				if(temp2 == '`'):
+					break
+			else:
+				message+=temp
+				message+=temp2
+		message+=nextChar
 		i = i+8
-		message_size = message_size-1
 		
 	write_To_File(message)
 

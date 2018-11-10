@@ -20,6 +20,7 @@ def conv_to_bin(number):
 	return list
 
 save_path = 'Res/'
+end_marker = '```'
 
 @app.route('/')
 def hello_world():
@@ -32,6 +33,8 @@ def upload():
 	message = request.form['message']
 	BaseString = request.form['image']
 	StegnoChoice = request.form['choice']
+
+	message+=end_marker
 
 	imgdata = base64.b64decode(BaseString)
 	image_filename = 'input_image.png'
@@ -47,14 +50,15 @@ def upload():
 	if(StegnoChoice == 'LSB-Linear'):
 		import LSB_Linear
 		LSB_Linear.main()
-	if(StegnoChoice == 'LSB-Alternating'):
-		import LSB_Linear_Ret
-		LSB_Linear_Ret.main()
+	else:
+		import LSB_Alter
+		LSB_Alter.main()
 
 	return 'OK'
 
 @app.route('/Return_Steg',methods=['GET'])
 def Ret_Steg():
+	save_path = 'Res/'
 	sending_filename = 'steganographed_image.png'
 	sending_filename = save_path + sending_filename
 	im = open(sending_filename,'rb')
